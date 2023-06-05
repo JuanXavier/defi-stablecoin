@@ -1,0 +1,17 @@
+{
+  "extends": "solhint:recommended",
+  "rules": {
+    "not-rely-on-time": ["off"],
+    "avoid-low-level-calls": "off",
+    "compiler-version": ["off"],
+    "no-inline-assembly": ["off"],
+    "func-name-mixedcase": ["off"],
+    "var-name-mixedcase": "off",
+    "no-empty-blocks": ["off"],
+    "max-line-length": "off",
+    "private-vars-leading-underscore": "off",
+    "ordering": "warn",
+    "reason-string": ["warn", { "maxLength": 48 }],
+    "func-visibility": ["warn", { "ignoreConstructors": true }]
+  }
+}
