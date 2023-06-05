@@ -1,6 +1,6 @@
 {
-  "extends": "solhint:recommended",
   "rules": {
+    "private-vars-leading-underscore": "off",
     "not-rely-on-time": ["off"],
     "avoid-low-level-calls": "off",
     "compiler-version": ["off"],
@@ -9,7 +9,6 @@
     "var-name-mixedcase": "off",
     "no-empty-blocks": ["off"],
     "max-line-length": "off",
-    "private-vars-leading-underscore": "off",
     "ordering": "warn",
     "reason-string": ["warn", { "maxLength": 48 }],
     "func-visibility": ["warn", { "ignoreConstructors": true }]
