@@ -27,7 +27,6 @@ contract DSCEngineTest is StdCheats, Test {
     function testPriceRevertsOnStaleCheck() public {
         vm.warp(block.timestamp + 4 hours + 1 seconds);
         vm.roll(block.number + 1);
-
         vm.expectRevert(OracleLib.OracleLib__StalePrice.selector);
         AggregatorV3Interface(address(aggregator)).staleCheckLatestRoundData();
     }
@@ -38,7 +37,6 @@ contract DSCEngineTest is StdCheats, Test {
         uint256 _timestamp = 0;
         uint256 _startedAt = 0;
         aggregator.updateRoundData(_roundId, _answer, _timestamp, _startedAt);
-
         vm.expectRevert(OracleLib.OracleLib__StalePrice.selector);
         AggregatorV3Interface(address(aggregator)).staleCheckLatestRoundData();
     }
