@@ -3,13 +3,12 @@ pragma solidity 0.8.19;
 
 import { ERC20Burnable, ERC20 } from "../lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import { Ownable } from "../lib/openzeppelin-contracts/contracts/access/Ownable.sol";
-
-import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import { IERC20 } from "../lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
 
 /**
  * @title DecentralizedStableCoin
  * @author Juan Xavier Valverde
- * Collateral: Exogenous
+ * Type of Collateral: Exogenous
  * Minting (Stability Mechanism): Decentralized (Algorithmic)
  * Value (Relative Stability): Anchored (Pegged to USD)
  * Collateral Type: Crypto
@@ -18,22 +17,22 @@ import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
  */
 
 contract DecentralizedStableCoin is ERC20Burnable, Ownable {
-    error DecentralizedStableCoin__AmountMustBeMoreThanZero();
-    error DecentralizedStableCoin__BurnAmountExceedsBalance();
-    error DecentralizedStableCoin__NotZeroAddress();
+    error DecentralizedStableCoin_AmountMustBeMoreThanZero();
+    error DecentralizedStableCoin_BurnAmountExceedsBalance();
+    error DecentralizedStableCoin_NotZeroAddress();
 
     constructor() ERC20("DecentralizedStableCoin", "DSC") {}
 
     function burn(uint256 _amount) public override onlyOwner {
         uint256 balance = balanceOf(msg.sender);
-        if (_amount == 0) revert DecentralizedStableCoin__AmountMustBeMoreThanZero();
-        if (balance < _amount) revert DecentralizedStableCoin__BurnAmountExceedsBalance();
+        if (_amount == 0) revert DecentralizedStableCoin_AmountMustBeMoreThanZero();
+        if (balance < _amount) revert DecentralizedStableCoin_BurnAmountExceedsBalance();
         super.burn(_amount);
     }
 
     function mint(address _to, uint256 _amount) external onlyOwner returns (bool) {
-        if (_to == address(0)) revert DecentralizedStableCoin__NotZeroAddress();
-        if (_amount == 0) revert DecentralizedStableCoin__AmountMustBeMoreThanZero();
+        if (_to == address(0)) revert DecentralizedStableCoin_NotZeroAddress();
+        if (_amount == 0) revert DecentralizedStableCoin_AmountMustBeMoreThanZero();
         _mint(_to, _amount);
         return true;
     }

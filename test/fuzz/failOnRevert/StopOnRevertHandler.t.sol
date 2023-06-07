@@ -2,15 +2,15 @@
 
 pragma solidity ^0.8.19;
 
-import {EnumerableSet} from "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
-import {Test} from "forge-std/Test.sol";
-import {ERC20Mock} from "@openzeppelin/contracts/mocks/ERC20Mock.sol";
+import { EnumerableSet } from "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
+import { Test } from "forge-std/Test.sol";
+import { ERC20Mock } from "@openzeppelin/contracts/mocks/ERC20Mock.sol";
 
-import {MockV3Aggregator} from "../../mocks/MockV3Aggregator.sol";
-import {DSCEngine, AggregatorV3Interface} from "../../../src/DSCEngine.sol";
-import {DecentralizedStableCoin} from "../../../src/DecentralizedStableCoin.sol";
-import {MockV3Aggregator} from "../../mocks/MockV3Aggregator.sol";
-import {console} from "forge-std/console.sol";
+import { MockV3Aggregator } from "../../mocks/MockV3Aggregator.sol";
+import { DSCEngine, AggregatorV3Interface } from "../../../src/DSCEngine.sol";
+import { DecentralizedStableCoin } from "../../../src/DecentralizedStableCoin.sol";
+import { MockV3Aggregator } from "../../mocks/MockV3Aggregator.sol";
+import { console } from "forge-std/console.sol";
 
 contract StopOnRevertHandler is Test {
     using EnumerableSet for EnumerableSet.AddressSet;
@@ -49,9 +49,11 @@ contract StopOnRevertHandler is Test {
         ERC20Mock collateral = _getCollateralFromSeed(collateralSeed);
 
         vm.startPrank(msg.sender);
+
         collateral.mint(msg.sender, amountCollateral);
         collateral.approve(address(dscEngine), amountCollateral);
         dscEngine.depositCollateral(address(collateral), amountCollateral);
+
         vm.stopPrank();
     }
 
@@ -60,18 +62,16 @@ contract StopOnRevertHandler is Test {
         uint256 maxCollateral = dscEngine.getCollateralBalanceOfUser(address(collateral), msg.sender);
 
         amountCollateral = bound(amountCollateral, 0, maxCollateral);
-        if (amountCollateral == 0) {
-            return;
-        }
+        if (amountCollateral == 0) return;
+
         dscEngine.redeemCollateral(address(collateral), amountCollateral);
     }
 
     function burnDsc(uint256 amountDsc) public {
         // Must burn more than 0
         amountDsc = bound(amountDsc, 0, dsc.balanceOf(msg.sender));
-        if (amountDsc == 0) {
-            return;
-        }
+        if (amountDsc == 0) return;
+
         dscEngine.burnDsc(amountDsc);
     }
 

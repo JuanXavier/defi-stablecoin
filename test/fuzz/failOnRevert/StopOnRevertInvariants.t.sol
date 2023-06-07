@@ -14,7 +14,7 @@ import { DecentralizedStableCoin } from "../../../src/DecentralizedStableCoin.so
 import { HelperConfig } from "../../../script/HelperConfig.s.sol";
 import { DeployDSC } from "../../../script/DeployDSC.s.sol";
 import { ERC20Mock } from "../../../lib/openzeppelin-contracts/contracts/mocks/ERC20Mock.sol";
-import { StopOnRevertHandler } from "./StopOnRevertHandler.t.sol";
+import { StopOnRevertHandler } from "./StopOnRevert Handler.t.sol";
 import { console } from "forge-std/console.sol";
 
 contract StopOnRevertInvariants is StdInvariant, Test {
@@ -45,6 +45,7 @@ contract StopOnRevertInvariants is StdInvariant, Test {
         DeployDSC deployer = new DeployDSC();
         (dsc, dsce, helperConfig) = deployer.run();
         (ethUsdPriceFeed, btcUsdPriceFeed, weth, wbtc, ) = helperConfig.activeNetworkConfig();
+
         handler = new StopOnRevertHandler(dsce, dsc);
         targetContract(address(handler));
         // targetContract(address(ethUsdPriceFeed)); Why can't we just do this?
