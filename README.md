@@ -1,10 +1,3 @@
-# Foundry DeFi Stablecoin
-
-This is a section of the Cyfrin Foundry Solidity Course.
-
-[DSCEngine Example](https://sepolia.etherscan.io/address/0x091ea0838ebd5b7dda2f2a641b068d6d59639b98#code)
-[Decentralized Stablecoin Example](https://sepolia.etherscan.io/address/0xf30021646269007b0bdc0763fd736c6380602f2f#code)
-
 # About
 
 This project is meant to be a stablecoin where users can deposit WETH and WBTC in exchange for a token that will be pegged to the USD.
@@ -43,12 +36,6 @@ git clone https://github.com/Cyfrin/foundry-defi-stablecoin-f23
 cd foundry-defi-stablecoin-f23
 forge build
 ```
-
-### Optional Gitpod
-
-If you can't or don't want to run and install locally, you can work with this repo in Gitpod. If you do this, you can skip the `clone this repo` part.
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/PatrickAlphaC/foundry-smart-contract-lottery-f23)
 
 # Usage
 
